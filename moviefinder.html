@@ -6,10 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Movie Finder</title>
     <script src="https://unpkg.com/vue"></script>
+    <style>
+        .active {
+            color: green;
+            background-color: yellow;
+        }
+
+        .text-danger {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div id="el">
-        <h1>{{welcome}}</h1>
+        <h1 v-bind:class="{active: isActive}">{{welcome}}</h1>
         <br>
         <label for="">Find Movie</label>
         <input v-model="findMovie">
@@ -21,6 +31,8 @@
         </ul>
         <br>
         <button @click="pressed">Press Meh</button>
+        <button @click="isActive = !isActive">Press meh too plz</button>
+        <h3 :style="myStyles">Howdy</h3>
     </div>
     <script>
         new Vue({
@@ -37,7 +49,13 @@
                        'Jack And Jill',
                        'Grease',
                        'Final Destination'
-                   ]
+                   ],
+                   myStyles: {
+                       color: 'blue',
+                       fontSize: '100px'
+
+                   },
+                   isActive: false
                 }
             },
             methods: {
