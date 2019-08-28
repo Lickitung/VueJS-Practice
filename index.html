@@ -9,15 +9,29 @@
 </head>
 <body>
     <div id="el">
-        <h1 v-show="false">Hello World</h1>
-        <img :src="picture" alt="">
+        <ul>
+            <li v-for="(book, index) in books" :key="index">{{index}}: {{book}}</li>
+        </ul>
+        <ul>
+            <li v-for="(value, key, index) in myBook">{{index}}. {{key}}: {{value}}</li>
+        </ul>
+        <ul>
+            <li v-for="n in 99">{{n}}</li>
+        </ul>
     </div>
     <script>
         new Vue({
             el: '#el',
             data() {
                 return {
-                    picture: 'http://source.unsplash.com/random/600x500'
+                   books: [
+                       'war and peace',
+                       'Book 2'
+                   ],
+                   myBook: {
+                       author: 'Smith',
+                       title: 'War Of The Worlds'
+                   }
                 }
             }
             
