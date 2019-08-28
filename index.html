@@ -9,27 +9,30 @@
 </head>
 <body>
     <div id="el">
-       <h1>{{hello}}</h1> 
+       <h1>{{checker()}}</h1>
+       <h2>{{incrementer}}</h2>
+       <button @click="incrementer++">Press Meh</button>
+       <input type="text" @keyup.enter="incrementer++">
     </div>
     <script>
         new Vue({
             el: '#el',
             data() {
                 return {
-                    hello: 'Hello World!'
+                    hello: 'Hello World!',
+                    data: 'Some Data',
+                    otherData: 'Other Data',
+                    val: true,
+                    incrementer: 0
                 }
             },
-            beforeCreate() {
-                console.log('before Create');
-            },
-            created() {
-                console.log('created');
-            },
-            beforeMount() {
-                console.log('before mount');
-            },
-            mounted() {
-                console.log('mounted');
+            methods: {
+                checker() {
+                    return this.val ? this.data : this.otherData
+                },
+                onClick() {
+                    alert('My name is Brandon');
+                }
             }
         })
     </script>
