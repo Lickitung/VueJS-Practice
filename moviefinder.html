@@ -19,6 +19,8 @@
                 {{movie}}
             </li>
         </ul>
+        <br>
+        <button @click="pressed">Press Meh</button>
     </div>
     <script>
         new Vue({
@@ -38,10 +40,20 @@
                    ]
                 }
             },
+            methods: {
+                pressed() {
+                    this.filteredMovies = ['Die Hard', 'Illusionist', 'Rampage']
+                }
+            },
             computed: {
-                filteredMovies() {
-                    let filter = new RegExp(this.findMovie, 'i');
-                    return this.movies.filter(el => el.match(filter));
+                filteredMovies: {
+                    get() {
+                        let filter = new RegExp(this.findMovie, 'i');
+                        return this.movies.filter(el => el.match(filter));
+                    },
+                    set(val) {
+                        this.movies = val;
+                    }
                 }
             }
             
