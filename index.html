@@ -18,6 +18,18 @@
                 return {
                     hello: 'Hello World!'
                 }
+            },
+            beforeCreate() {
+                console.log('before Create');
+            },
+            created() {
+                console.log('created');
+            },
+            beforeMount() {
+                console.log('before mount');
+            },
+            mounted() {
+                console.log('mounted');
             }
         })
     </script>
