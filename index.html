@@ -15,7 +15,14 @@
         <h1 v-if="value == 1">Hello</h1>
         <h1 v-else-if="value == 2">Goodbye</h1>
         <h1 v-else>Yo Default</h1>
-        Value = {{value}}
+        <div v-if="value == 1">
+            <label for="">UserName</label>
+            <input placeholder="Enter Username" type="text" key="user-input">
+        </div>
+        <div v-else>
+            <label for="">Address</label>
+            <input placeholder="Enter Address" type="text" key="address-input">
+        </div>
     </div>
     <script>
         new Vue({
