@@ -16,7 +16,11 @@
 				<option v-for='element in list_info' v-bind:value='element.color'>{{element.value}}</option>
 			</select>
 			<hr/>
-			<p>The color of the fruit you selected is: <span>{{message|capitalize}}</span></p>
+            <p>The color of the fruit you selected is: <span>{{message}}</span></p>
+            <br>
+            <hr>
+            <input v-model='input'>
+            <p>Computed prop: {{computed_msg}}</p>
 			
 		</div>
 	<script type='text/javascript'>
@@ -24,6 +28,7 @@
 			el:'#app',
 			data:{
 				message:'default value set in DATA',
+                input: 'this is what will go to computed prop',
 				list_info:[
 					{value:'apple',color:'red',},
 					{value:'peach',color:'peach',},
@@ -32,6 +37,11 @@
 					{value:'banana',color:'yellow',},
 				],
 			},
+            computed: {
+                computed_msg: function() {
+                    return this.input.split('').reverse().join('')
+                }
+            },
             filters: {
                 capitalize: function(v) {
                     return v.toUpperCase()
