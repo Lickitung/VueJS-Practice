@@ -13,31 +13,36 @@
 	<body>	
 		<div id='app'>
 			<select v-model='message'>
-				<option v-for='element in list_info' v-bind:value='element.value'>{{element.text}}</option>
+				<option v-for='element in list_info' v-bind:value='element.color'>{{element.value}}</option>
 			</select>
 			<hr/>
-			<p>You have selected: <span>{{message}}</span></p>
+			<p>The color of the fruit you selected is: <span>{{message|capitalize}}</span></p>
 			
 		</div>
 	<script type='text/javascript'>
 		var vm = new Vue({
 			el:'#app',
-			data: function() {
-                return {
-                    message:'default value set in DATA',
-                    list_info:[
-                        {value:'apple',text:'fruit 1',},
-                        {value:'peach',text:'fruit 2',},
-                        {value:'orange',text:'fruit 3',},
-                        {value:'pear',text:'fruit 4',},
-                        {value:'banana',text:'fruit 5',},
-                    ]
-                }
+			data:{
+				message:'default value set in DATA',
+				list_info:[
+					{value:'apple',color:'red',},
+					{value:'peach',color:'peach',},
+					{value:'orange',color:'orange',},
+					{value:'pear',color:'green',},
+					{value:'banana',color:'yellow',},
+				],
 			},
+            filters: {
+                capitalize: function(v) {
+                    return v.toUpperCase()
+                }
+            }
 		})
 	</script>	
 	</body>
 </html>
+
+
 
 
 
