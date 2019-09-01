@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id='app'>
+        <input  v-model='message' @input='limitReached'>
+        {{remain}}/{{text_limit}}
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                text_limit: 25,
+                message: 'Enter some text here.'
+            },
+            computed: {
+                remain: function() {
+                    return this.text_limit - this.message.length 
+                }
+            },
+            methods: {
+                limitReached: function() {
+                    if (this.remain <= 0) {
+                       return alert('text limit reached');
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
