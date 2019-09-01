@@ -14,24 +14,25 @@
 <body>
     <div id='app'>
         {{message}}
-        <simple-comp></simple-comp>
+        <simple-comp v-bind:prop='message'></simple-comp>
     </div>
 
     <template id='temp'>
         <div id='component'>
            <p>{{compMessage}}</p> 
+           <p>{{prop}}</p>
         </div>
     </template>
 
     <script>
-        Vue.component('simple-comp', {
+        var component = Vue.component('simple-comp', {
             template: '#temp',
             data: function() {
                 return {
-                    compMessage: 'Testing vue component'
+                    compMessage: 'Testing vue component and ' + this.prop
                 }
             },
-            props: [],
+            props: ['prop'],
             methods: {}
         });
         var vm = new Vue({
