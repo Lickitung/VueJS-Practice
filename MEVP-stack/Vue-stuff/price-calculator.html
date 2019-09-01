@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <item label='Price' v-model='price'></item>
+        <item label='Shipping' v-model='shipping'></item>
+        <item label='Discount' v-model='discount'></item>
+        <hr>
+        <p><span>Total: </span> {{total}} </p>
+    </div>
+
+    <template id='template'>
+        <div>
+            <label>{{label}}</label> <!-- label is a prop -->
+            <br>
+            <input v-bind:value='value' v-on:input='send($event.target.value)'> <!-- prop name:value -->
+        </div>
+    </template>
+    <script>
+        Vue.component('item', {
+            template: '#template',
+            data: function() {
+                return {}
+            },
+            props: ['label', 'value'],
+            methods: {
+                send:function(v) {
+                    // send v to Vue data
+                    this.$emit('input', v)
+                }
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                price: 0,
+                shipping: 0,
+                discount: 0
+            },
+            computed: {
+                total:function() {
+                    //type coercion first
+                    this.price = Number(this.price)
+                    this.shipping = Number(this.shipping)
+                    this.discount = Number(this.discount)
+                    return this.price + this.shipping - this.discount
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>
