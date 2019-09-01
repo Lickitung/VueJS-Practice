@@ -1,0 +1,70 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+       .warning{border: red solid 2px}
+
+       #app{
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        align-content: center
+       }
+
+       #counter{
+           font-size: 4rem;
+           text-align: center;
+       }
+
+       #box {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div id='app'>
+        <div>
+            <br>
+            <textarea id='box' v-bind:class='{warning:!remain}' v-model='message' @input='check'></textarea>
+            <p id='counter'>{{remain}}/{{limit}}</p>
+        </div>
+    </div>
+    
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                message: '',
+                limit: 25
+            },
+            computed: {
+                remain: function() {
+                    return this.limit - this.message.length
+                }
+            },
+            methods: {
+                check: function() {
+                    if (this.remain < 0) {
+                        this.message = this.message.substr(0,this.limit)
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
