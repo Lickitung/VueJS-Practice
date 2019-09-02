@@ -15,6 +15,7 @@
         <br>
         <h1>The color of the fruit you selected is: {{message}}</h1>
         <br>
+        <input v-model="text"> {{remain}} / {{limit}}
     </div>
 
     <script>
@@ -28,7 +29,14 @@
                         {name: 'pear', color: 'green'},
                         {name: 'orange', color: 'orange'},
                         {name: 'banana', color: 'yellow'}
-                    ]
+                    ],
+                    limit: 25,
+                    text: ''
+                }
+            },
+            computed: {
+                remain: function() {
+                    return  this.limit - this.text.length
                 }
             }
         })
