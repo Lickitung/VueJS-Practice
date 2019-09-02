@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Daily Vue Practice</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <select v-model="message">
+            <option v-for="fruit in fruits" v-bind:value="fruit.color">{{fruit.name}}</option>
+        </select>
+        <br>
+        <h1>The color of the fruit you selected is: {{message}}</h1>
+        <br>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    message: 'default data set in Vue',
+                    fruits: [
+                        {name: 'apple', color: 'red'},
+                        {name: 'pear', color: 'green'},
+                        {name: 'orange', color: 'orange'},
+                        {name: 'banana', color: 'yellow'}
+                    ]
+                }
+            }
+        })
+    </script>
+</body>
+</html>

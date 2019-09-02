@@ -1,0 +1,129 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>News App</title>
+    <script src="https://use.fontawesome.com/e199565684.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .button-size{
+            font-size: 45px;
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="app">
+        <i v-if='show' @click='show=!show' title='Edit' class="button-size fa fa-pencil" aria-hidden="true"></i>
+        <i v-if='!show' @click='show=!show' title='Save' class="button-size fa fa-save" aria-hidden="true"></i>
+        <div v-if='show' id='reading-mode'>
+            <reading-comp :title='title' :author='author' :date='date' :category='category'>
+            {{article}}
+            </reading-comp>
+        </div>
+        <div v-if='!show' id='editing-mode'>Editing Mode</div>
+    </div>
+
+    <template id='reading-temp'>
+        <div>
+            <h1>{{title}}</h1> <!-- Title is a prop -->
+            <div id="line"></div>
+            <slot></slot> <!-- article displayed here-->
+            <div id="line"></div>
+            <p>Created by <span>{{author}}</span> and last edited at <span>{{date}}</span></p>
+            <div id="category"><span>{{category}}</span></div>
+            <!-- author, date, category are props -->
+        </div>
+    </template>
+
+    <script>
+        function ymdhms() {
+            var date = new Date()
+
+            var year = String(date.getFullYear())
+            var year_two_digit = "'" + year.substr(2, 2)
+            var month = date.getMonth() + 1
+            switch(month) {
+                case 1:
+                var month_str = 'Jan'
+                break;
+                case 2:
+                var month_str = 'Feb'
+                break;
+                case 3:
+                var month_str = 'March'
+                break;
+                case 4:
+                var month_str = 'April'
+                break;
+                case 5:
+                var month_str = 'May'
+                break;
+                case 6:
+                var month_str = 'June'
+                break;
+                case 7:
+                var month_str = 'July'
+                break;
+                case 8:
+                var month_str = 'August'
+                break;
+                case 9:
+                var month_str = 'September'
+                break;
+                case 10:
+                var month_str = 'October'
+                break;
+                case 11:
+                var month_str = 'November'
+                break;
+                case 12:
+                var month_str = 'December'
+                break;
+            }
+            
+            var day = date.getDate()
+
+            if(day<-9) {
+                day = '0' + day
+            } 
+
+            var hour = date.getHours()
+            var min = date.getMinutes()
+            var sec = date.getSeconds()
+
+            var mdy = month_str + ' ' + day + ' ' + year_two_digit
+
+            var hms = hour + ':' + min + ':' + sec
+
+            var ymdhms = mdy + ' ' + hms
+            
+            console.log(ymdhms)
+            return ymdhms
+        }
+        
+        
+        Vue.component('reading-comp', {
+            template: '#reading-temp',
+            props: ['title', 'author', 'date', 'category'],
+            data: function() {
+                return {}
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                show: true,
+                title: 'A news app',
+                article: 'This is practice for all the schnazzy Vue schtuff',
+                author: 'Brandon Evans',
+                date: '2019',
+                category: 'Tech'
+            },
+            computed: {},
+            methods: {}
+        })
+    </script>
+</body>
+</html>
